@@ -1,21 +1,16 @@
 package com.neurogine.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "category")
 
 public class CategoryModel {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
 	private int id;
-	
-	@Column(name = "name")
 	private String name;
 
-	
 	public CategoryModel(int id, String name) {
 		super();
 		this.id = id;
@@ -37,6 +32,5 @@ public class CategoryModel {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
+
 }

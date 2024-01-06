@@ -1,5 +1,11 @@
 package com.neurogine.respositories;
 
-public interface ICategoryRepository {
+import java.util.Locale.Category;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface ICategoryRepository extends MongoRepository<Category, Integer> {
 
 }
