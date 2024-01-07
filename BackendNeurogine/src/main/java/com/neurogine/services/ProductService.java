@@ -52,4 +52,9 @@ public class ProductService implements IProductService {
 		return productRepository.findAll(pageable);
 	}
 
+	@Override
+	public List<ProductModel> getProductByEmail(String email) {
+		return productRepository.findByEmail(email);
+	}
+
 }

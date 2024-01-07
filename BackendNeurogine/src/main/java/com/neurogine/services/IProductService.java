@@ -14,6 +14,8 @@ public interface IProductService {
 
 	Optional<ProductModel> getProductById(int id);
 
+	List<ProductModel> getProductByEmail(String email);
+
 	ProductModel addProduct(ProductModel productModel);
 
 	ProductModel editProduct(ProductModel productModel);

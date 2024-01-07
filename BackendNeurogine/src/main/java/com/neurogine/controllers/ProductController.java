@@ -32,30 +32,51 @@ public class ProductController {
 
 	@GetMapping("getProductById/{id}")
 	public ResponseEntity<ProductModel> getProductbyId(@PathVariable int id) {
-		Optional<ProductModel> product = productService.getProductById(id);
-		if (product.isEmpty()) {
-			return new ResponseEntity<>(product.get(), HttpStatus.NOT_FOUND);
-		} else {
-			return new ResponseEntity<>(product.get(), HttpStatus.OK);
+		try {
+			Optional<ProductModel> product = productService.getProductById(id);
+			if (product.isEmpty()) {
+				return new ResponseEntity<>(product.get(), HttpStatus.NOT_FOUND);
+			} else {
+				return new ResponseEntity<>(product.get(), HttpStatus.OK);
+			}
+		} catch (Exception ex) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}
 
 	@PostMapping("addProduct")
 	public ResponseEntity<ProductModel> addProduct(@RequestBody ProductModel product) {
-		ProductModel addProduct = productService.addProduct(product);
-		return new ResponseEntity<>(addProduct, HttpStatus.CREATED);
+		try {
+			List<ProductModel> email = productService.getProductByEmail(product.getEmail());
+			if (email.size() == 0) {
+				ProductModel addProduct = productService.addProduct(product);
+				return new ResponseEntity<>(addProduct, HttpStatus.CREATED);
+			} else {
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+			}
+		} catch (Exception ex) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
 	}
 
 	@PutMapping("editProduct")
 	public ResponseEntity<ProductModel> editProduct(@RequestBody ProductModel product) {
-		ProductModel editProduct = productService.addProduct(product);
-		return new ResponseEntity<>(editProduct, HttpStatus.CREATED);
+		try {
+			ProductModel editProduct = productService.addProduct(product);
+			return new ResponseEntity<>(editProduct, HttpStatus.CREATED);
+		} catch (Exception ex) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
 	}
 
 	@DeleteMapping("deleteProduct")
 	public ResponseEntity<Void> deleteProduct(@PathVariable int id) {
-		productService.deleteProduct(id);
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		try {
+			productService.deleteProduct(id);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		} catch (Exception ex) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
 	}
 
 	@GetMapping("/filter")

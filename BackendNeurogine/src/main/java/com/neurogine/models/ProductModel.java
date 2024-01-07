@@ -13,11 +13,15 @@ public class ProductModel {
 	private String email;
 	private CategoryModel category;
 	private String address;
-	private int geolocation;
+	private GeoLocationModel geolocation;
 	private String image;
 
+	public ProductModel() {
+		super();
+	}
+
 	public ProductModel(int id, String name, String description, String email, CategoryModel category, String address,
-			int geolocation, String image) {
+			GeoLocationModel geolocation, String image) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -77,11 +81,11 @@ public class ProductModel {
 		this.address = address;
 	}
 
-	public int getGeolocation() {
+	public GeoLocationModel getGeolocation() {
 		return geolocation;
 	}
 
-	public void setGeolocation(int geolocation) {
+	public void setGeolocation(GeoLocationModel geolocation) {
 		this.geolocation = geolocation;
 	}
 

@@ -11,6 +11,10 @@ public class CategoryModel {
 	private int id;
 	private String name;
 
+	public CategoryModel() {
+		super();
+	}
+
 	public CategoryModel(int id, String name) {
 		super();
 		this.id = id;
